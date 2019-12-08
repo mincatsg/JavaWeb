@@ -1,0 +1,39 @@
+CREATE TABLE category  (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  name varchar(20)
+);
+
+
+CREATE TABLE student  (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  name varchar(20)
+);
+
+
+CREATE TABLE book  (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  name varchar(20),
+  author varchar(20),
+  price decimal(10, 2),
+  category_id int(11),
+  CONSTRAINT fk_book_category_id FOREIGN KEY (category_id) REFERENCES category (id)
+);
+
+
+
+CREATE TABLE borrow_info  (
+  id int(11) PRIMARY KEY AUTO_INCREMENT,
+  book_id int(11),
+  student_id int(11),
+  start_time timestamp null,
+  end_time timestamp null,
+  CONSTRAINT fk_borrow_info_book_id FOREIGN KEY (book_id) REFERENCES book (id),
+  CONSTRAINT fk_borrow_info_student_id FOREIGN KEY (student_id) REFERENCES student (id)
+);
+
+ 查询某个分类下的图书借阅信息。
+select book.id,book.name,borrow_info.start_time  from category, book, borrow_info where
+         category.id = book.category_id and
+          
+         book.id = borrow_info.book_id
+         and category.end_time > 2019-01-01 00:00:00;
