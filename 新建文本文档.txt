@@ -1,0 +1,127 @@
+create table student(
+    id int,
+    name varchar(20),
+    password varchar(20),
+    amount decimal(11,2),
+    resume text,
+    birthday timestamp
+);
+
+
+create table goods(
+    goods_id int,
+    goods_name varchar(20),
+    unitprice decimal(10,2),
+    category varchar(20),
+    provider varchar(20)
+
+);
+
+
+create table customer(
+    customer_id int,
+    name varchar(20),
+    address varchar(20),
+    email varchar(20),
+    sex bit,
+    card_id varchar(30)
+);
+
+DROP TABLE IF EXISTS student;
+CREATE TABLE student (
+ ?  id INT PRIMARY KEY auto_increment,
+ ?  sn INT UNIQUE,
+ ?  name VARCHAR(20) DEFAULT 'unkown',
+ ?  qq_mail VARCHAR(20),
+    classes_id int,
+    FOREIGN KEY (classes_id) REFERENCES classes(id)
+);
+
+
+
+create table purchase(
+    order_id int,
+    customer_id int,
+    goods_id int,
+    nums decimal(10,2)
+);
+
+
+insert into goods(goods_id, goods_name, unitprice, category, provider) values
+   (001,'苹果',20,'水果','mm');
+
+update goods set goods_id=002, goods_name='香蕉';
+
+delete from goods;
+
+
+
+
+
+
+-- 创建考试成绩表
+DROP TABLE IF EXISTS exam_result;
+CREATE TABLE exam_result (
+    id INT,
+    name VARCHAR(20),
+    chinese DECIMAL(3,1),
+    math DECIMAL(3,1),
+    english DECIMAL(3,1)
+);
+
+
+-- 插入测试数据
+INSERT INTO exam_result (id,name, chinese, math, english) VALUES
+    (1,'唐三藏', 67, 98, 56),
+    (2,'孙悟空', 87.5, 78, 77),
+    (3,'猪悟能', 88, 98.5, 90),
+    (4,'曹孟德', 82, 84, 67),
+    (5,'刘玄德', 55.5, 85, 45),
+    (6,'孙权', 70, 73, 78.5),
+    (7,'宋公明', 75, 65, 30);
+
+
+将谁选择出来并排序在分页
+select * from exam_result where id < 6 order by math desc limit 2,3;   //第二行（不包括）后面3个
+
+
+修改数据
+将孙悟空的数学成绩改为80
+
+update exam_result set math = 80 while name = ‘孙悟空’
+
+删除数据
+
+删除孙悟空同学的考试成绩
+
+delete from exam_result where name = '孙悟空'
+
+
+
+
+DROP TABLE IF EXISTS student;
+CREATE TABLE student(
+id INT PRIMARY KEY auto_increment,
+sn INT UNIQUE,
+name VARCHAR(20) DEFAULT 'unkown',
+qq_mail VARCHAR(20),
+classes_id int,
+FOREIGN KEY (classes_id) REFERENCES classes(id)
+);
+
+DROP TABLE IF EXISTS course;
+CREATE TABLE course(
+id INT PRIMARY KEY auto_increment,
+name VARCHAR(20)
+);
+
+
+DROP TABLE IF EXISTS score;
+CREATE TABLE score (
+id INT PRIMARY KEY auto_increment,
+score DECIMAL(3, 1),
+student_id int,
+course_id int,
+FOREIGN KEY (student_id) REFERENCES student(id),
+FOREIGN KEY (course_id) REFERENCES course(id)
+);
