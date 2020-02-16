@@ -1,0 +1,101 @@
+DROP TABLE IF EXISTS student;
+CREATE TABLE student (
+id INT,
+sn INT comment '学号',
+name VARCHAR(20) comment '姓名',
+qq_mail VARCHAR(20) comment 'QQ邮箱'
+);
+-- 插入两条记录，value_list 数量必须和定义表的列的数量及顺序一致
+INSERT INTO student VALUES (100, 10000, '唐三藏', NULL);
+INSERT INTO student VALUES (101, 10001, '孙悟空', '11111');
+-- 插入两条记录，value_list 数量必须和指定列数量及顺序一致
+INSERT INTO student (id, sn, name) VALUES
+(102, 20001, '曹孟德'),
+(103, 20002, '孙仲谋');
+
+
+
+DROP TABLE IF EXISTS exam_result;
+CREATE TABLE exam_result (
+id INT,
+name VARCHAR(20),
+chinese DECIMAL(3,1),
+math DECIMAL(3,1),
+english DECIMAL(3,1)
+);
+-- 插入测试数据
+INSERT INTO exam_result (id,name, chinese, math, english) VALUES
+(1,'唐三藏', 67, 98, 56),
+(2,'孙悟空', 87.5, 78, 77),
+(3,'猪悟能', 88, 98.5, 90),
+(4,'曹孟德', 82, 84, 67),
+(5,'刘玄德', 55.5, 85, 45),
+(6,'孙权', 70, 73, 78.5),
+(7,'宋公明', 75, 65, 30);
+
+
+SELECT id, name, math, english, chinese FROM exam_result ORDER BY id LIMIT 3
+OFFSET 0;
+-- 第 2 页
+SELECT id, name, math, english, chinese FROM exam_result ORDER BY id LIMIT 3
+OFFSET 3;
+-- 第 3 页，如果结果不足 3 个，不会有影响
+SELECT id, name, math, english, chinese FROM exam_result ORDER BY id LIMIT 3
+OFFSET 6;
+UPDATE table_name SET column = expr [, column = expr ...]
+[WHERE ...] [ORDER BY ...] [LIMIT ...]
+
+not null;
+unique;
+default 'mm';
+primary key;
+auto_increment;
+foreign key;
+primary key
+
+
+create table emp(
+id int primary key auto_increment,
+name varchar(20) not null,
+role varchar(20) not null,
+salary numeric(11,2)
+);
+
+insert into emp(name, role, salary) values
+('马云','服务员', 1000.20),
+('马化腾','游戏陪玩', 2000.99),
+('孙悟空','游戏角色', 999.11),
+('猪无能','游戏角色', 333.5),
+('沙和尚','游戏角色', 700.33),
+('隔壁老王','董事长', 12000.66);
+
+
+select * from student stu left join score sco on stu.id=sco.student_id;
+-- 对应的右外连接为：
+select * from score sco right join student stu on stu.id=sco.student_id;
+-- 学生表、成绩表、课程表3张表关联查询
+SELECT
+stu.id,
+stu.sn,
+stu.NAME,
+stu.qq_mail,
+sco.score,
+sco.course_id,
+cou.NAME
+FROM
+student stu
+LEFT JOIN score sco ON stu.id = sco.student_id
+LEFT JOIN course cou ON sco.course_id = cou.id
+ORDER BY
+stu.id;
+-- 先查询“计算机原理”和“Java”课程的id
+select id,name from course where name='Java' or name='计算机原理';
+-- 再查询成绩表中，“计算机原理”成绩比“Java”成绩 好的信息
+SELECT
+s1.*
+FROM
+score s1,
+score s2
+WHERE
+s1.student_id = s2.student_id
+比特科
