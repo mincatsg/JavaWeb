@@ -1,0 +1,17 @@
+create table intern(
+        work_number varchar(20),
+        name varchar(20),
+        age int,
+        sex varchar(10),
+        school varchar(20),
+        professional varchar(20),
+        phone varchar(30),
+        work_place varchar(30),
+        inauguration  varchar(20)
+);
+
+insert into intern(work_number, name, age, sex, school, professional, phone, work_place, inauguration) values
+                                        ('001', '张三', 20, '男', '西安工业大学', '软件工程', '18700191923', '神州数码融信有限公司', '已实习'),
+                                        ('002', '小花', 20, '女', '西北农林科技大学', '软件工程'),
+                                        ('003', '李四', 21, '男', '西北工业大学明德学院', '软件工程', '13995089982', '神州数码融信有限公司', '已实习'),
+                                        ('004', '小明', 20, '男', '西北工业大学明德学院', '软件工程', '18700156234', '神州数码融信有限公司', '已实习');
