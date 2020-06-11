@@ -1,0 +1,21 @@
+create table userbasic(
+     userid varchar(10) primary key,
+     username varchar(10),
+     tender varchar(10),
+     create_date varchar(20),
+     reservel varchar(10)
+);
+
+
+create table userstatus(
+          userid varchar(10) primary key,
+          userstatus  varchar(10),
+          update_date varchar(20),
+          reservel varchar(10)
+);
+
+
+insert into userstatus(userid, userstatus, update_date, reservel) values
+                                  ('0101', '签到', '2020-6-11 14:04', '良好'),
+                                  ('0202', '签退', '2020-6-11 14:05', '良好'),
+                                  ('0303', '临时签退', '2020-6-11 14:04', '优先');
